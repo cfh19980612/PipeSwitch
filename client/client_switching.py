@@ -55,7 +55,7 @@ def main():
     data2 = get_data(model_name2, batch_size)
 
     latency_list = []
-    for _ in range(3):
+    for _ in range(4):
         # Send training request
         client_train_1 = TcpClient('localhost', 12346)
         send_request(client_train_1, task_1_name_train, data1)
@@ -85,7 +85,7 @@ def main():
     print()
     print()
     print()
-    stable_latency_list = latency_list[0:]
+    stable_latency_list = latency_list[1:]
     print (stable_latency_list)
     print ('Latency: %f ms (stdev: %f)' % (statistics.mean(stable_latency_list), 
                                            statistics.stdev(stable_latency_list)))
