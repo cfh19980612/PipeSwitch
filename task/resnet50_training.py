@@ -33,7 +33,7 @@ def import_func():
         optimizer = torch.optim.SGD(model.parameters(), lr, momentum=momentum, weight_decay=weight_decay)
 
         loss = None
-        for i in range(100):
+        for i in range(10):
             start_time = time.time()
             # Data to GPU
             images_cuda = images.cuda(non_blocking=True)
