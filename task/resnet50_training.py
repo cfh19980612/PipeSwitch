@@ -49,7 +49,7 @@ def import_func():
             optimizer.step()
             end_time = time.time()
             print ('Training', i, time.time(), loss.item())
-            training_time_list.append(end_time - start_time)
+            training_time_list.append((end_time - start_time)*1000)
             del images_cuda
             del target_cuda
         print ('Latency: %f ms (stdev: %f)' % (statistics.mean(training_time_list), 
