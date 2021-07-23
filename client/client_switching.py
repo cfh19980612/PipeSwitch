@@ -43,40 +43,42 @@ def close_connection(client):
     timestamp('client', 'close_connection')
 
 def main():
-    model_name = sys.argv[1]
-    batch_size = int(sys.argv[2])
+    model_name1 = sys.argv[1]
+    model_name2 = sys.argv[2]
+    batch_size = int(sys.argv[3])
 
-    task_name_inf = '%s_inference' % model_name
-    task_name_train = '%s_training' % model_name
+    task_1_name_train = '%s_training' % model_name1
+    task_2_name_train = '%s_training' % model_name2
 
     # Load image
-    data = get_data(model_name, batch_size)
+    data1 = get_data(model_name1, batch_size)
+    data2 = get_data(model_name2, batch_size)
 
     latency_list = []
     for _ in range(20):
         # Send training request
-        client_train = TcpClient('localhost', 12345)
-        send_request(client_train, task_name_train, None)
+        client_train_1 = TcpClient('localhost', 12345)
+        send_request(client_train_1, task_1_name_train, data1)
         time.sleep(4)
 
         # Connect
-        client_inf = TcpClient('localhost', 12345)
+        client_train_2 = TcpClient('localhost', 12345)
         timestamp('client', 'after_inference_connect')
         time_1 = time.time()
 
         # Send inference request
-        send_request(client_inf, task_name_inf, data)
+        send_request(client_train_2, task_2_name_train, data2)
 
         # Recv inference reply
-        recv_response(client_inf)
+        recv_response(client_train_2)
         time_2 = time.time()
         latency = (time_2 - time_1) * 1000
         latency_list.append(latency)
 
         time.sleep(1)
-        recv_response(client_train)
-        close_connection(client_inf)
-        close_connection(client_train)
+        recv_response(client_train_1)
+        close_connection(client_train_2)
+        close_connection(client_train_1)
         time.sleep(1)
         timestamp('**********', '**********')
 
