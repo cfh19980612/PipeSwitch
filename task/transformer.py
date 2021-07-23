@@ -1,9 +1,9 @@
 import torch
 
 import task.common as util
-
 def import_model():
-    model = torch.hub.load('pytorch/fairseq', 'transformer.wmt14.en-fr', tokenizer='moses', bpe='subword_nmt')
+    model = torch.hub.load('huggingface/pytorch-transformers', 'model',
+                           'sentence-transformers/paraphrase-xlm-r-multilingual-v1')
     util.set_fullname(model, 'transformer')
     return model
 
