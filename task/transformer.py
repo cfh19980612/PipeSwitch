@@ -3,7 +3,7 @@ import torch
 import task.common as util
 
 def import_model():
-    model = torch.hub.load('pytorch/fairseq', 'transformer.wmt14.en-fr', tokenizer='moses', bpe='subword_nmt',force_reload=True)
+    model = torch.hub.load('pytorch/fairseq', 'transformer.wmt14.en-fr', tokenizer='moses', bpe='subword_nmt')
     util.set_fullname(model, 'transformer')
     return model
 
