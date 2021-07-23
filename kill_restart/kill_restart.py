@@ -10,7 +10,7 @@ from util.util import TcpServer, TcpAgent, timestamp
 
 def func_get_request(qout):
     # Listen connections
-    server = TcpServer('localhost', 12345)
+    server = TcpServer('localhost', 12346)
 
     while True:
         # Get connection
