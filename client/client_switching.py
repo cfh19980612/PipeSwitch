@@ -85,7 +85,7 @@ def main():
     print()
     print()
     print()
-    stable_latency_list = latency_list[10:]
+    stable_latency_list = latency_list[0:]
     print (stable_latency_list)
     print ('Latency: %f ms (stdev: %f)' % (statistics.mean(stable_latency_list), 
                                            statistics.stdev(stable_latency_list)))
