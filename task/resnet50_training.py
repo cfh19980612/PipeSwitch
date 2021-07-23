@@ -52,7 +52,7 @@ def import_func():
             training_time_list.append((end_time - start_time)*1000)
             del images_cuda
             del target_cuda
-        print ('Latency: %f ms (stdev: %f)' % (statistics.mean(training_time_list), 
+        print ('%s, Latency: %f ms (stdev: %f)' % (TASK_NAME, statistics.mean(training_time_list), 
                                            statistics.stdev(training_time_list)))
         return loss.item()
     return train
