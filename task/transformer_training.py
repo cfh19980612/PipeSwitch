@@ -5,6 +5,8 @@ import torch.nn as nn
 
 import task.transformer as transformer
 import task.common as util
+import statistics
+
 
 TASK_NAME = 'transformer_training'
 
@@ -27,13 +29,15 @@ def import_func():
         optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
         loss = None
-        for i in range(1000):
+        training_time_list = []
+        for i in range(10):
             # Data to GPU
             data_cuda = data.view(2, -1, 251).cuda()
             target_0_cuda = target[0].cuda()
             target_1_cuda = target[1].cuda()
 
             # compute output
+            start_time = time.time()
             output = model(data_cuda[0], token_type_ids=data_cuda[1])
             loss1 = criterion(output[0], target_0_cuda)
             loss2 = criterion(output[1], target_1_cuda)
@@ -43,11 +47,14 @@ def import_func():
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-            
+            end_time = time.time()
             print ('Training', i, time.time(), loss.item())
             del data_cuda
             del target_0_cuda
             del target_1_cuda
+            training_time_list.append((end_time - start_time)*1000)
+        print ('Latency: %f ms (stdev: %f)' % (statistics.mean(training_time_list), 
+                                           statistics.stdev(training_time_list)))
 
         return loss
     

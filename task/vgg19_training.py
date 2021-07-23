@@ -6,6 +6,8 @@ import torch.nn as nn
 import task.vgg19 as vgg19
 import task.common as util
 
+import statistics
+
 TASK_NAME = 'vgg19_training'
 
 def import_data_loader():
@@ -30,12 +32,14 @@ def import_func():
         optimizer = torch.optim.SGD(model.parameters(), lr, momentum=momentum, weight_decay=weight_decay)
 
         loss = None
-        for i in range(100):
+        training_time_list = []
+        for i in range(10):
             # Data to GPU
             images_cuda = images.cuda(non_blocking=True)
             target_cuda = target.cuda(non_blocking=True)
 
             # compute output
+            start_time = time.time()
             output = model(images_cuda)
             loss = criterion(output, target_cuda)
 
@@ -43,11 +47,13 @@ def import_func():
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-
+            end_time = time.time()
             print ('Training', i, time.time(), loss.item())
             del images_cuda
             del target_cuda
-        
+            training_time_list.append((end_time - start_time)*1000)
+        print ('Latency: %f ms (stdev: %f)' % (statistics.mean(training_time_list), 
+                                           statistics.stdev(training_time_list)))
         return loss.item()
     return train
 
