@@ -53,8 +53,8 @@ def main():
             task_list.append(line.strip())
     
     for i in range (len(task_list)):
-        model_name = task_list.split()[0]
-        batch_size = int(task_list.split()[1])
+        model_name = task_list[i].split()[0]
+        batch_size = int(task_list[i].split()[1])
         task_name_train = '%s_training' % model_name
         data = get_data(model_name, batch_size)
         client_train = TcpClient('localhost', 12346)
