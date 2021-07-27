@@ -33,7 +33,7 @@ def import_func():
 
         loss = None
         training_time_list = []
-        for i in range(100):
+        for i in range(10):
             # Data to GPU
             images_cuda = images.cuda(non_blocking=True)
             target_cuda = target.cuda(non_blocking=True)
