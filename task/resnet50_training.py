@@ -22,7 +22,7 @@ def import_func():
     def train(model, data_loader):
         training_time_list = []
         # Prepare data
-        batch_size = 32
+        batch_size = 64
         images, target = data_loader(batch_size)
 
         # Prepare training
