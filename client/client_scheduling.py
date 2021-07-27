@@ -62,6 +62,7 @@ def main():
         recv_response(client_train)
         close_connection(client_train)
         timestamp('**********', '**********')
+        time.sleep(2)
 
     # model_name1 = sys.argv[1]
     # model_name2 = sys.argv[2]
