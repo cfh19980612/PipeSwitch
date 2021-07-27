@@ -45,6 +45,7 @@ def func_schedule(qin):
         #     active_worker.join()
         active_worker = mp.Process(target=worker_compute, args=(agent, model_name, data_b))
         active_worker.start()
+        active_worker.join()
 
 def worker_compute(agent, model_name, data_b):
     # Load model
