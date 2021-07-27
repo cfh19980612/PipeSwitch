@@ -1,0 +1,6 @@
+resnet50_training 8
+vgg19_training 8
+inception_v3_training 8
+vgg19_training 8
+inception_v3_training 8
+resnet50_training 8

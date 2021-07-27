@@ -32,15 +32,17 @@ def func_get_request(qout):
         else:
             data_b = None
         timestamp('tcp', 'get_data')
+        # push the task to the queue
         qout.put((agent, model_name, data_b))
 
 def func_schedule(qin):
     active_worker = None
     while True:
+        # get the top task in the queue
         agent, model_name, data_b = qin.get()
-        if active_worker is not None:
-            active_worker.kill()
-            active_worker.join()
+        # if active_worker is not None:
+        #     active_worker.kill()
+        #     active_worker.join()
         active_worker = mp.Process(target=worker_compute, args=(agent, model_name, data_b))
         active_worker.start()
 
@@ -55,8 +57,10 @@ def worker_compute(agent, model_name, data_b):
 
     # Compute
     if 'training' in model_name:
+        # agent does not need the training results?
         agent.send(b'FNSH')
         del agent
+
         timestamp('server', 'reply')
 
         output = func(model, data_loader)
@@ -65,7 +69,6 @@ def worker_compute(agent, model_name, data_b):
     else:
         output = func(model, data_b)
         timestamp('server', 'complete')
-
         agent.send(b'FNSH')
         del agent
         timestamp('server', 'reply')
