@@ -62,7 +62,7 @@ def main():
         recv_response(client_train)
         close_connection(client_train)
         timestamp('**********', '**********')
-        time.sleep(2)
+
 
     # for i in range (40):
     #     model_name = task_list[i].split()[0]
