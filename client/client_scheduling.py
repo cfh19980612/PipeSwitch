@@ -44,7 +44,7 @@ def close_connection(client):
 
 def main():
     timestamp('frontend', 'start')
-
+    
     # Load model list
     model_list_file_name = sys.argv[1]
     task_list = []
@@ -63,6 +63,18 @@ def main():
         close_connection(client_train)
         timestamp('**********', '**********')
         time.sleep(2)
+
+    # for i in range (40):
+    #     model_name = task_list[i].split()[0]
+    #     batch_size = int(task_list[i].split()[1])
+    #     task_name_train = '%s_training' % model_name
+    #     data = get_data(model_name, batch_size)
+    #     client_train = TcpClient('localhost', 12346)
+    #     send_request(client_train, task_name_train, data)
+    #     recv_response(client_train)
+    #     close_connection(client_train)
+    #     timestamp('**********', '**********')
+    #     time.sleep(2)
 
     # model_name1 = sys.argv[1]
     # model_name2 = sys.argv[2]
