@@ -69,9 +69,9 @@ class WorkerProc(Process):
                     print ('Get output', output)
                     del output
 
-                # if 'inference' in model_name:
-                #     self.pipe.send('FNSH')
-                #     agent.send(b'FNSH')
+                if 'inference' in model_name:
+                    self.pipe.send('FNSH')
+                    agent.send(b'FNSH')
             except Exception as e:
                 complete_queue.put('FNSH')
 
