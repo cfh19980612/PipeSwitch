@@ -64,14 +64,14 @@ class WorkerProc(Process):
                     self.pipe.send('FNSH')
                     agent.send(b'FNSH')
                 
-                # with torch.cuda.stream(model_summary.cuda_stream_for_computation):
-                #     output = model_summary.execute(data_b)
-                #     print ('Get output', output)
-                #     del output
+                with torch.cuda.stream(model_summary.cuda_stream_for_computation):
+                    output = model_summary.execute(data_b)
+                    print ('Get output', output)
+                    del output
 
-                if 'inference' in model_name:
-                    self.pipe.send('FNSH')
-                    agent.send(b'FNSH')
+                # if 'inference' in model_name:
+                #     self.pipe.send('FNSH')
+                #     agent.send(b'FNSH')
             except Exception as e:
                 complete_queue.put('FNSH')
 
