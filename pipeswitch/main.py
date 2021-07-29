@@ -1,6 +1,6 @@
 import sys
 from queue import Queue
-
+sys.path.append("..")
 import torch
 import torch.multiprocessing as mp
 
