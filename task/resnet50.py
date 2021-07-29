@@ -23,10 +23,10 @@ def import_data(batch_size):
     from torchvision import transforms
     input_image = Image.open(filename)
     preprocess = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
     input_tensor = preprocess(input_image)
     image = input_tensor.unsqueeze(0) # create a mini-batch as expected by the model
@@ -36,9 +36,7 @@ def import_data(batch_size):
     return images, target
 
 def import_model():
-    model = torch.hub.load('pytorch/vision:v0.4.2',
-                           MODEL_NAME,
-                           pretrained=True)
+    model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
     util.set_fullname(model, MODEL_NAME)
 
     return model
