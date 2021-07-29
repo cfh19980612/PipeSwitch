@@ -57,12 +57,12 @@ def main():
     latency_list = []
     for _ in range(4):
         # Send training request
-        client_train_1 = TcpClient('localhost', 12346)
+        client_train_1 = TcpClient('localhost', 12345)
         send_request(client_train_1, task_1_name_train, data1)
         time.sleep(4)
 
         # Connect
-        client_train_2 = TcpClient('localhost', 12346)
+        client_train_2 = TcpClient('localhost', 12345)
         timestamp('client', 'after_inference_connect')
         time_1 = time.time()
 
