@@ -1,5 +1,7 @@
 resnet152_inference
 resnet152_training
+resnet50_training
+vgg19_training
 inception_v3_inference
 inception_v3_training
 bert_base_inference
