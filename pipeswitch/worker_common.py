@@ -62,8 +62,8 @@ class ModelSummary():
         self.insert_lock_hook(self.shape_summary_list)
 
         # Add hooks for termination in both forward and backward propagations
-        if 'training' in self.model_name:
-            self.insert_terminate_hook(self.model)
+        # if 'training' in self.model_name:
+        #     self.insert_terminate_hook(self.model)
 
         # Allocate fake memory for parameters
         self.cuda_stream_for_parameter = torch.cuda.Stream()
