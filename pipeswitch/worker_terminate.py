@@ -13,6 +13,6 @@ class WorkerTermThd(threading.Thread):
             if self.TERMINATE_SIGNAL[0] == 0:
                 self.pipe.send('IDLE')
             elif self.TERMINATE_SIGNAL[0] == 1:
-                # self.TERMINATE_SIGNAL[0] = 2
-                # self.complete_queue.get()
+                self.TERMINATE_SIGNAL[0] = 2
+                self.complete_queue.get()
                 self.pipe.send('FNSH')
